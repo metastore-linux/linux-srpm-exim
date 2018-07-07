@@ -1,0 +1,34 @@
+diff --git a/src/configure.default b/src/configure.default
+index ecc3d6e..1e3c63f 100644
+--- a/src/configure.default
++++ b/src/configure.default
+@@ -732,6 +732,12 @@ userforward:
+   pipe_transport = address_pipe
+   reply_transport = address_reply
+ 
++procmail:
++  driver = accept
++  check_local_user
++  require_files = ${local_part}:+${home}/.procmailrc:/usr/bin/procmail
++  transport = procmail
++  no_verify
+ 
+ # This router matches local user mailboxes. If the router fails, the error
+ # message is "Unknown user".
+@@ -773,6 +779,16 @@ remote_smtp:
+   driver = smtp
+   message_size_limit = ${if > {$max_received_linelength}{998} {1}{0}}
+ 
++# This transport invokes procmail to deliver mail
++procmail:
++  driver = pipe
++  command = "/usr/bin/procmail -d $local_part"
++  return_path_add
++  delivery_date_add
++  envelope_to_add
++  user = $local_part
++  initgroups
++  return_output
+ 
+ # This transport is used for local delivery to user mailboxes in traditional
+ # BSD mailbox format. By default it will be run under the uid and gid of the
