@@ -11,71 +11,71 @@
 # hardened build if not overridden
 %{!?_hardened_build:%global _hardened_build 1}
 
-Name:               exim
-Version:            4.89.1
-Release:            1%{?dist}
-Summary:            The exim mail transfer agent
-Group:              System Environment/Daemons
-License:            GPLv2+
-URL:                https://www.exim.org/
+Name:                   exim
+Version:                4.89.1
+Release:                1%{?dist}
+Summary:                The exim mail transfer agent
+Group:                  System Environment/Daemons
+License:                GPLv2+
+URL:                    https://www.exim.org/
 
-Source:             ftp://ftp.exim.org/pub/exim/exim4/exim-%{version}.tar.xz
-Source2:            exim.init
-Source3:            exim.sysconfig
-Source4:            exim.logrotate
-Source5:            exim-tidydb.sh
-Source11:           exim.pam
-Source12:           exim-clamav-tmpfiles.conf
-Source20:           exim-greylist.conf.inc
-Source21:           mk-greylist-db.sql
-Source22:           greylist-tidy.sh
-Source23:           trusted-configs
-Source24:           exim.service
-Source25:           exim-gen-cert
-Source26:           clamd.exim.service
+Source:                 ftp://ftp.exim.org/pub/exim/exim4/exim-%{version}.tar.xz
+Source2:                exim.init
+Source3:                exim.sysconfig
+Source4:                exim.logrotate
+Source5:                exim-tidydb.sh
+Source11:               exim.pam
+Source12:               exim-clamav-tmpfiles.conf
+Source20:               exim-greylist.conf.inc
+Source21:               mk-greylist-db.sql
+Source22:               greylist-tidy.sh
+Source23:               trusted-configs
+Source24:               exim.service
+Source25:               exim-gen-cert
+Source26:               clamd.exim.service
 # Signature
-Source900:          ftp://ftp.exim.org/pub/exim/exim4/exim-%{version}.tar.xz.asc
+Source900:              ftp://ftp.exim.org/pub/exim/exim4/exim-%{version}.tar.xz.asc
 
-Patch4:             exim-4.88-rhl.patch
-Patch6:             exim-4.89.1-config.patch
-Patch8:             exim-4.82-libdir.patch
-Patch12:            exim-4.88-cyrus.patch
-Patch13:            exim-4.88-pamconfig.patch
-Patch14:            exim-4.87-spamdconf.patch
-Patch18:            exim-4.89-dlopen-localscan.patch
-Patch19:            exim-4.88-procmail.patch
-Patch20:            exim-4.88-allow-filter.patch
-Patch21:            exim-4.87-localhost-is-local.patch
-Patch22:            exim-4.88-greylist-conf.patch
-Patch23:            exim-4.88-smarthost-config.patch
-Patch25:            exim-4.89.1-dynlookup-config.patch
+Patch4:                 exim-4.88-rhl.patch
+Patch6:                 exim-4.89.1-config.patch
+Patch8:                 exim-4.82-libdir.patch
+Patch12:                exim-4.88-cyrus.patch
+Patch13:                exim-4.88-pamconfig.patch
+Patch14:                exim-4.87-spamdconf.patch
+Patch18:                exim-4.89-dlopen-localscan.patch
+Patch19:                exim-4.88-procmail.patch
+Patch20:                exim-4.88-allow-filter.patch
+Patch21:                exim-4.87-localhost-is-local.patch
+Patch22:                exim-4.88-greylist-conf.patch
+Patch23:                exim-4.88-smarthost-config.patch
+Patch25:                exim-4.89.1-dynlookup-config.patch
 # Upstream ticket: http://bugs.exim.org/show_bug.cgi?id=1584
-Patch26:            exim-4.85-pic.patch
-Patch27:            exim-4.89-environment.patch
+Patch26:                exim-4.85-pic.patch
+Patch27:                exim-4.89-environment.patch
 
-BuildRoot:          %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:      libdb-devel openssl-devel openldap-devel pam-devel
-BuildRequires:      pcre-devel sqlite-devel cyrus-sasl-devel
-BuildRequires:      openldap-devel openssl-devel mysql-devel postgresql-devel
-BuildRequires:      libXaw-devel libXmu-devel libXext-devel libX11-devel libSM-devel
-BuildRequires:      perl-devel
-BuildRequires:      perl-generators
-BuildRequires:      libICE-devel libXpm-devel libXt-devel perl(ExtUtils::Embed)
-BuildRequires:      systemd-units libgsasl-devel
-Requires:           /etc/pki/tls/certs /etc/pki/tls/private
-Requires:           /etc/aliases
-Requires:           perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
-Requires(pre):      %{_sbindir}/groupadd, %{_sbindir}/useradd
-Requires(post):     /sbin/chkconfig /sbin/service /sbin/restorecon %{_sbindir}/alternatives systemd systemd-sysv
-Requires(preun):    %{_sbindir}/alternatives systemd
-Requires(postun):   %{_sbindir}/alternatives systemd
+BuildRoot:              %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:          libdb-devel openssl-devel openldap-devel pam-devel
+BuildRequires:          pcre-devel sqlite-devel cyrus-sasl-devel
+BuildRequires:          openldap-devel openssl-devel mysql-devel postgresql-devel
+BuildRequires:          libXaw-devel libXmu-devel libXext-devel libX11-devel libSM-devel
+BuildRequires:          perl-devel
+BuildRequires:          perl-generators
+BuildRequires:          libICE-devel libXpm-devel libXt-devel perl(ExtUtils::Embed)
+BuildRequires:          systemd-units libgsasl-devel
+Requires:               /etc/pki/tls/certs /etc/pki/tls/private
+Requires:               /etc/aliases
+Requires:               perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires(pre):          %{_sbindir}/groupadd, %{_sbindir}/useradd
+Requires(post):         /sbin/chkconfig /sbin/service /sbin/restorecon %{_sbindir}/alternatives systemd systemd-sysv
+Requires(preun):        %{_sbindir}/alternatives systemd
+Requires(postun):       %{_sbindir}/alternatives systemd
 %if %{with clamav}
 %if 0%{?fedora} < 23
-Requires:           initscripts
+Requires:               initscripts
 %endif
-BuildRequires:      clamav-devel
+BuildRequires:          clamav-devel
 %endif
-Provides:           MTA smtpd smtpdaemon server(smtp)
+Provides:               MTA smtpd smtpdaemon server(smtp)
 
 %description
 Exim is a message transfer agent (MTA) developed at the University of
@@ -93,12 +93,12 @@ configuration of exim is quite different to that of sendmail.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package sysvinit
-Summary:            SysV initscript for Exim
-Group:              System Environment/Daemons
-BuildArch:          noarch
-Requires:           %{name} = %{version}-%{release}
-Requires(preun):    chkconfig
-Requires(post):     chkconfig
+Summary:                SysV initscript for Exim
+Group:                  System Environment/Daemons
+BuildArch:              noarch
+Requires:               %{name} = %{version}-%{release}
+Requires(preun):        chkconfig
+Requires(post):         chkconfig
 
 %description sysvinit
 This package contains the SysV initscript for Exim.
@@ -109,9 +109,9 @@ This package contains the SysV initscript for Exim.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package mysql
-Summary:            MySQL lookup support for Exim
-Group:              System Environment/Daemons
-Requires:           exim = %{version}-%{release}
+Summary:                MySQL lookup support for Exim
+Group:                  System Environment/Daemons
+Requires:               exim = %{version}-%{release}
 
 %description mysql
 This package contains the MySQL lookup module for Exim
@@ -121,9 +121,9 @@ This package contains the MySQL lookup module for Exim
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package pgsql
-Summary:            PostgreSQL lookup support for Exim
-Group:              System Environment/Daemons
-Requires:           exim = %{version}-%{release}
+Summary:                PostgreSQL lookup support for Exim
+Group:                  System Environment/Daemons
+Requires:               exim = %{version}-%{release}
 
 %description pgsql
 This package contains the PostgreSQL lookup module for Exim
@@ -133,8 +133,8 @@ This package contains the PostgreSQL lookup module for Exim
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package mon
-Summary:            X11 monitor application for Exim
-Group:              Applications/System
+Summary:                X11 monitor application for Exim
+Group:                  Applications/System
 
 %description mon
 The Exim Monitor is an optional supplement to the Exim package. It
@@ -148,12 +148,12 @@ interface.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package clamav
-Summary:            Clam Antivirus scanner dæmon configuration for use with Exim
-Group:              System Environment/Daemons
-Requires:           clamav-server exim
-Obsoletes:          clamav-exim <= 0.86.2
-Requires(post):     /sbin/chkconfig /sbin/service
-Requires(preun):    /sbin/chkconfig /sbin/service
+Summary:                Clam Antivirus scanner dæmon configuration for use with Exim
+Group:                  System Environment/Daemons
+Requires:               clamav-server exim
+Obsoletes:              clamav-exim <= 0.86.2
+Requires(post):         /sbin/chkconfig /sbin/service
+Requires(preun):        /sbin/chkconfig /sbin/service
 
 %description clamav
 This package contains configuration files which invoke a copy of the
@@ -178,12 +178,12 @@ http://www.exim.org/exim-html-%{version}/doc/html/spec_html/ch41.html
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package clamav-sysvinit
-Summary:            SysV initscript for Clam Antivirus scanner for Exim
-Group:              System Environment/Daemons
-BuildArch:          noarch
-Requires:           exim-clamav = %{version}-%{release}
-Requires(preun):    chkconfig
-Requires(post):     chkconfig
+Summary:                SysV initscript for Clam Antivirus scanner for Exim
+Group:                  System Environment/Daemons
+BuildArch:              noarch
+Requires:               exim-clamav = %{version}-%{release}
+Requires(preun):        chkconfig
+Requires(post):         chkconfig
 
 %description clamav-sysvinit
 This package contains the SysV initscript.
@@ -195,10 +195,10 @@ This package contains the SysV initscript.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package greylist
-Summary:            Example configuration for greylisting using Exim
-Group:              System Environment/Daemons
-Requires:           sqlite exim
-Requires:           crontabs
+Summary:                Example configuration for greylisting using Exim
+Group:                  System Environment/Daemons
+Requires:               sqlite exim
+Requires:               crontabs
 
 %description greylist
 This package contains a simple example of how to do greylisting in Exim's
@@ -251,11 +251,11 @@ cp exim_monitor/EDITME Local/eximon.conf
 
 %build
 %ifnarch s390 s390x sparc sparcv9 sparcv9v sparc64 sparc64v
-	export PIE=-fpie
-	export PIC=-fpic
+    export PIE=-fpie
+    export PIC=-fpic
 %else
-	export PIE=-fPIE
-	export PIC=-fPIC
+    export PIE=-fPIE
+    export PIC=-fPIC
 %endif
 make _lib=%{_lib} FULLECHO= LDFLAGS="%{?__global_ldflags} %{?_hardened_build:-pie -Wl,-z,relro,-z,now}"
 
@@ -272,18 +272,18 @@ cd build-`scripts/os-type`-`scripts/arch-type`
 install -m 4775 exim $RPM_BUILD_ROOT%{_sbindir}
 
 for i in eximon eximon.bin exim_dumpdb exim_fixdb exim_tidydb \
-	exinext exiwhat exim_dbmbuild exicyclog exim_lock \
-	exigrep eximstats exipick exiqgrep exiqsumm \
-	exim_checkaccess convert4r4
+    exinext exiwhat exim_dbmbuild exicyclog exim_lock \
+    exigrep eximstats exipick exiqgrep exiqsumm \
+    exim_checkaccess convert4r4
 do
-	install -m 0755 $i $RPM_BUILD_ROOT%{_sbindir}
+    install -m 0755 $i $RPM_BUILD_ROOT%{_sbindir}
 done
 
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/exim/%{version}-%{release}/lookups
 for i in mysql.so pgsql.so
-do 
-	install -m755 lookups/$i \
-	 $RPM_BUILD_ROOT%{_libdir}/exim/%{version}-%{release}/lookups
+do
+    install -m755 lookups/$i \
+     $RPM_BUILD_ROOT%{_libdir}/exim/%{version}-%{release}/lookups
 done
 
 cd ..
@@ -317,8 +317,8 @@ install -d -m 0750 $RPM_BUILD_ROOT%{_var}/log/exim
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man8
 install -m644 doc/exim.8 $RPM_BUILD_ROOT%{_mandir}/man8/exim.8
 pod2man --center=EXIM --section=8 \
-	$RPM_BUILD_ROOT/usr/sbin/eximstats \
-	$RPM_BUILD_ROOT%{_mandir}/man8/eximstats.8
+    $RPM_BUILD_ROOT/usr/sbin/eximstats \
+    $RPM_BUILD_ROOT%{_mandir}/man8/eximstats.8
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
 install -m 644 %SOURCE3 $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/exim
@@ -352,16 +352,16 @@ chmod 600 $RPM_BUILD_ROOT/etc/pki/tls/{certs,private}/exim.pem
 # generate alternatives ghosts
 mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
 for i in %{_sbindir}/sendmail %{_bindir}/{mailq,runq,rsmtp,rmail,newaliases} \
-	/usr/lib/sendmail %{_sysconfdir}/pam.d/smtp %{_mandir}/man1/mailq.1.gz
+    /usr/lib/sendmail %{_sysconfdir}/pam.d/smtp %{_mandir}/man1/mailq.1.gz
 do
-	touch $RPM_BUILD_ROOT$i
+    touch $RPM_BUILD_ROOT$i
 done
 
 %if %{with clamav}
 # Munge the clamav init and config files from clamav-devel. This really ought
 # to be a subpackage of clamav, but this hack will have to do for now.
 function clamsubst() {
-	 sed -e "s!<SERVICE>!$3!g;s!<USER>!$4!g;""$5" %{_datadir}/clamav/template/"$1" >"$RPM_BUILD_ROOT$2"
+     sed -e "s!<SERVICE>!$3!g;s!<USER>!$4!g;""$5" %{_datadir}/clamav/template/"$1" >"$RPM_BUILD_ROOT$2"
 }
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/clamd.d
@@ -413,29 +413,29 @@ exit 0
 %systemd_post %{name}.service
 
 %{_sbindir}/alternatives --install %{_sbindir}/sendmail mta %{_sbindir}/sendmail.exim 10 \
-	--slave %{_bindir}/mailq mta-mailq %{_bindir}/mailq.exim \
-	--slave %{_bindir}/runq mta-runq %{_bindir}/runq.exim \
-	--slave %{_bindir}/rsmtp mta-rsmtp %{_bindir}/rsmtp.exim \
-	--slave %{_bindir}/rmail mta-rmail %{_bindir}/rmail.exim \
-	--slave /etc/pam.d/smtp mta-pam /etc/pam.d/exim \
-	--slave %{_bindir}/newaliases mta-newaliases %{_bindir}/newaliases.exim \
-	--slave /usr/lib/sendmail mta-sendmail /usr/lib/sendmail.exim \
-	--slave %{_mandir}/man1/mailq.1.gz mta-mailqman %{_mandir}/man8/exim.8.gz \
-	--initscript exim
+    --slave %{_bindir}/mailq mta-mailq %{_bindir}/mailq.exim \
+    --slave %{_bindir}/runq mta-runq %{_bindir}/runq.exim \
+    --slave %{_bindir}/rsmtp mta-rsmtp %{_bindir}/rsmtp.exim \
+    --slave %{_bindir}/rmail mta-rmail %{_bindir}/rmail.exim \
+    --slave /etc/pam.d/smtp mta-pam /etc/pam.d/exim \
+    --slave %{_bindir}/newaliases mta-newaliases %{_bindir}/newaliases.exim \
+    --slave /usr/lib/sendmail mta-sendmail /usr/lib/sendmail.exim \
+    --slave %{_mandir}/man1/mailq.1.gz mta-mailqman %{_mandir}/man8/exim.8.gz \
+    --initscript exim
 
 %preun
 %systemd_preun %{name}.service
 if [ $1 = 0 ]; then
-	%{_sbindir}/alternatives --remove mta %{_sbindir}/sendmail.exim
+    %{_sbindir}/alternatives --remove mta %{_sbindir}/sendmail.exim
 fi
 
 %postun
 %systemd_postun_with_restart %{name}.service
 if [ $1 -ge 1 ]; then
-	mta=`readlink /etc/alternatives/mta`
-	if [ "$mta" == "%{_sbindir}/sendmail.exim" ]; then
-		/usr/sbin/alternatives --set mta %{_sbindir}/sendmail.exim
-	fi
+    mta=`readlink /etc/alternatives/mta`
+    if [ "$mta" == "%{_sbindir}/sendmail.exim" ]; then
+        /usr/sbin/alternatives --set mta %{_sbindir}/sendmail.exim
+    fi
 fi
 
 %triggerun -- exim < %{sysv2systemdnvr}
@@ -453,8 +453,8 @@ fi
 
 %preun sysvinit
 if [ "$1" = 0 ]; then
-	%{_initrddir}/exim stop >/dev/null 2>&1 ||:
-	/sbin/chkconfig --del exim >/dev/null 2>&1 ||:
+    %{_initrddir}/exim stop >/dev/null 2>&1 ||:
+    /sbin/chkconfig --del exim >/dev/null 2>&1 ||:
 fi
 
 %postun sysvinit
@@ -1346,11 +1346,11 @@ test "$1"  = 0 || %{_initrddir}/clamd.exim condrestart >/dev/null 2>&1 || :
 * Fri Feb 04 2000 Tim Powers <timp@redhat.com>
 - fixed the groups to be in Red Hat groups.
 - removed Vendor header since it is going to be marked Red Hat in our build
-	system.
+    system.
 - quiet setups
 - strip binaries
 - fixed so that man pages can be auto gzipped by new RPM (in files list
-	/usr/man/*/* )
+    /usr/man/*/* )
 - built for Powertools 6.2
 
 * Tue Jan 18 2000 Mark Bergsma <mark@mbergsma.demon.nl>
@@ -1386,11 +1386,11 @@ test "$1"  = 0 || %{_initrddir}/clamd.exim condrestart >/dev/null 2>&1 || :
 
 * Mon Jul 12 1999 Mark Bergsma <mark@mbergsma.demon.nl>
 - Added /usr/sbin/sendmail as a link to exim.
-- Fixed wrong filenames in logrotate entry. 
+- Fixed wrong filenames in logrotate entry.
 
 * Sun Jul 11 1999 Mark Bergsma <mark@mbergsma.demon.nl>
 - Now using the '%%changelog' tag.
-- Removed the SysV init links - let chkconfig handle them. 
+- Removed the SysV init links - let chkconfig handle them.
 - Replaced install -d with mkdir -p
 
 * Sat Jul 10 1999 Mark Bergsma <mark@mbergsma.demon.nl>
